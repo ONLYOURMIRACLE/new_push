@@ -4,10 +4,8 @@ from lxml import etree
 
 
 
-
-
 if __name__ == '__main__':
-    flag = 0
+#青岛大学教务处教务通知
     url = 'http://jw.qdu.edu.cn/homepage/infoArticleList.do;jsessionid=D7477658C10DEA783A4FB0410A47904D?columnId=358'
 
     response = requests.get(url, headers={
@@ -45,8 +43,49 @@ if __name__ == '__main__':
 
 
     with open("./text.html", "w", encoding="utf-8") as f:
-        news = "今日更新内容 :" + names[0] + times[0] + links[0]
+        news = "今日更新内容 :" + '\n' + '青岛大学教务处教务通知:' + names[0] + ',' + times[0] + ',' + links[0]
         f.write(news)
+        f.write('\n')
+
+
+#青岛大学教务处教学动态
+    url = 'http://jw.qdu.edu.cn/homepage/infoArticleList.do;jsessionid=D7477658C10DEA783A4FB0410A47904D?sortColumn=publicationDate&columnId=5384&sortDirection=-1&pagingPage=1&pagingNumberPer=12'
+
+    response = requests.get(url)
+    response.encoding='utf-8'
+    html = response.text
+    parser = etree.HTML(html)
+
+
+    titles = parser.xpath('//a[@target="_blank"]/text()')
+    title = []  
+    for i in titles:
+        for j in ['\r','\n',' ']:
+            i = i.replace(j,'')
+        title.append(i)
+    names = []
+    for i in title:
+        if len(i) ==0:
+            continue
+        names.append(i)
+    names = names[:-1]
+
+
+    times = parser.xpath('//span/text()')
+    times = times[2:-2]
+
+
+    link = parser.xpath('//a[@target="_blank"]/@href')[:-1]
+    links = []
+    for i in link:
+        links.append('http://jw.qdu.edu.cn/homepage/' + i)
+
+
+    with open("./text.html", "a", encoding="utf-8") as f:
+        news = "今日更新内容 :" + '\n' + '青岛大学教务处教学动态:' + names[0] + ',' + times[0] + ',' + links[0]
+        f.write(news)
+        f.write('\n')
+
 
     with open("./update","w",encoding="utf-8") as f : 
         f.write("true")
