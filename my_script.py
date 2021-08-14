@@ -1,7 +1,13 @@
 # coding=utf-8
 import requests
 from lxml import etree
-
+import datetime
+today = datetime.datetime.now()
+        # 计算偏移量
+offset = datetime.timedelta(days=-1)
+        # 获取想要的日期的时间
+yesterday = (today + offset).strftime('%Y-%m-%d')
+today = datetime.datetime.now().strftime('%Y-%m-%d')
 
 
 if __name__ == '__main__':
@@ -43,9 +49,13 @@ if __name__ == '__main__':
 
 
     with open("./text.html", "w", encoding="utf-8") as f:
-        news = "今日更新内容 :" + '\n' + '青岛大学教务处教务通知:' + names[0] + ',' + times[0] + ',' + links[0]
-        f.write(news)
-        f.write('\n')
+        if times[0] == today or times[0] == yesterday:
+            news = "今日更新内容 :" + '\n' + '青岛大学教务处教务通知:' + names[0] + ',' + times[0] + ',' + links[0]
+            f.write(news)
+            f.write('\n')
+        else:
+            f.write('今天没有新的教务通知哦')
+            f.write('\n')
 
 
 #青岛大学教务处教学动态
@@ -82,9 +92,13 @@ if __name__ == '__main__':
 
 
     with open("./text.html", "a", encoding="utf-8") as f:
-        news = "今日更新内容 :" + '\n' + '青岛大学教务处教学动态:' + names[0] + ',' + times[0] + ',' + links[0]
-        f.write(news)
-        f.write('\n')
+        if times[0] == today or times[0] == yesterday:
+            news = "今日更新内容 :" + '\n' + '青岛大学教务处教学动态:' + names[0] + ',' + times[0] + ',' + links[0]
+            f.write(news)
+            f.write('\n')
+        else:
+            f.write('今天没有新的教学动态哦')
+            f.write('\n')
 
 
     with open("./update","w",encoding="utf-8") as f : 
