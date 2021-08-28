@@ -46,14 +46,15 @@ if __name__ == '__main__':
     for i in link:
         links.append('http://jw.qdu.edu.cn/homepage/' + i)
 
-
-
+    flag = 0
     with open("./text.html", "w", encoding="utf-8") as f:
-        if times[0] == today or times[0] == yesterday:
-            news = "今日更新内容 :" + '\n' + '青岛大学教务处教务通知:' + names[0] + ',' + times[0] + ',' + links[0]
-            f.write(news)
-            f.write('\n')
-        else:
+        for i in range(len(names)):
+            if times[i] == today or times[i] == yesterday:
+                news = "今日更新内容 :" + '\n' + '青岛大学教务处教务通知:' + names[i] + ',' + times[i] + ',' + links[i]
+                f.write(news)
+                f.write('\n')
+                flag = 1
+        if flag == 0:
             f.write('今天没有新的教务通知哦')
             f.write('\n')
 
@@ -90,17 +91,19 @@ if __name__ == '__main__':
     for i in link:
         links.append('http://jw.qdu.edu.cn/homepage/' + i)
 
-
+    flag = 0
     with open("./text.html", "a", encoding="utf-8") as f:
-        if times[0] == today or times[0] == yesterday:
-            news = "今日更新内容 :" + '\n' + '青岛大学教务处教学动态:' + names[0] + ',' + times[0] + ',' + links[0]
-            f.write(news)
-            f.write('\n')
-        else:
+        for i in range(len(names)):
+            if times[i] == today or times[i] == yesterday:
+                news = "今日更新内容 :" + '\n' + '青岛大学教务处教学动态:' + names[i] + ',' + times[i] + ',' + links[i]
+                f.write(news)
+                f.write('\n')
+                flag = 1
+        if flag == 0:
             f.write('今天没有新的教学动态哦')
             f.write('\n')
 
-
+#更新相应内容
     with open("./update","w",encoding="utf-8") as f : 
         f.write("true")
 
