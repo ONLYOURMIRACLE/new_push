@@ -103,14 +103,18 @@ if __name__ == '__main__':
             f.write('今天没有新的教学动态哦')
             f.write('\n')
                
-#获取每日人民日报PDF
-today1 = datetime.datetime.now().strftime('%Y-%m/%d')
-today2 = datetime.datetime.now().strftime('%Y%m%d')
-for i in range(1, 5):
-    url = 'http://paper.people.com.cn/rmrb/images/'+ today1 + '/0' + str(i) + '/rmrb' + today2 + '0' + str(i) + '.pdf'
-    r = requests.get(url)
-    with open("./text.html", "wb") as f:
-        f.write(r.content)
+#获取每日人民日报PDF url
+    with open("./text.html", "a", encoding="utf-8") as f:
+        f.write('以下是今日人民日报PDF URL 轻触以查看')
+        f.write('\n')
+    today1 = datetime.datetime.now().strftime('%Y-%m/%d')
+    today2 = datetime.datetime.now().strftime('%Y%m%d')
+
+    for i in range(1, 5):
+        url = 'http://paper.people.com.cn/rmrb/images/'+ today1 + '/0' + str(i) + '/rmrb' + today2 + '0' + str(i) + '.pdf'
+        with open("./text.html", "a", encoding="utf-8") as f:
+            f.write(url)
+            f.write('\n')
         
         
 
