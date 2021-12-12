@@ -111,7 +111,7 @@ for i in range(1, 5):
     r = requests.get(url)
     with open("./text.html", "wb") as f:
         f.write(r.content)
-        f.write('\n')
+        
         
 
 #更新相应内容
