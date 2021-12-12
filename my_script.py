@@ -104,7 +104,8 @@ if __name__ == '__main__':
             f.write('\n')
                
 #获取每日人民日报PDF
-today = datetime.datetime.now().strftime('%Y-%m/%d')
+today1 = datetime.datetime.now().strftime('%Y-%m/%d')
+today2 = datetime.datetime.now().strftime('%Y%m%d')
 for i in range(1, 5):
     url = 'http://paper.people.com.cn/rmrb/images/'+ today1 + '/0' + str(i) + '/rmrb' + today2 + '0' + str(i) + '.pdf'
     r = requests.get(url)
