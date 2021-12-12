@@ -102,6 +102,16 @@ if __name__ == '__main__':
         if flag == 0:
             f.write('今天没有新的教学动态哦')
             f.write('\n')
+               
+#获取每日人民日报PDF
+today = datetime.datetime.now().strftime('%Y-%m/%d')
+for i in range(1, 5):
+    url = 'http://paper.people.com.cn/rmrb/images/'+ today1 + '/0' + str(i) + '/rmrb' + today2 + '0' + str(i) + '.pdf'
+    r = requests.get(url)
+    with open("./text.html", "wb") as f:
+        f.write(r.content)
+        f.write('\n')
+        
 
 #更新相应内容
     with open("./update","w",encoding="utf-8") as f : 
